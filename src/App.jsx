@@ -1,14 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Button } from "@/components/ui/button"
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-    <div className='text-6xl bg-slate-500 w-screen'>hello</div>
+      
+      <h1 className="text-6xl text-black via-gray-700 bg-slate-600">SearchDev</h1>
+      <Button  variant="destructive">Button</Button>
+
     </>
   )
 }
