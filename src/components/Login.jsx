@@ -1,10 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { addUser } from "@/utils/userSlice";
-import { useNavigate } from "react-router-dom";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import { addUser } from "../utils/userSlice";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "@/utils/constants";
 const Login = () => {
 
@@ -20,9 +18,9 @@ const Login = () => {
           },{
             withCredentials:true,
           });
-          //console.log(response.data);
+          console.log(response.data);
           dispatch(addUser(response.data));
-          navigate("/feed");
+          return navigate("/feed");
         } catch (err) { 
             console.error(err)
         } 
@@ -95,12 +93,12 @@ const Login = () => {
               <div className="mt-6 text-center">
                 <p className="text-sm font-medium text-black">
                   Not have a password?{" "}
-                  <a
+                  <Link to="/Signup"
                     className="text-amber-500 hover:text-black"
-                    href="/forms/signup"
+                   
                   >
                     Sign up now
-                  </a>
+                  </Link>
                 </p>
               </div>
             </form>

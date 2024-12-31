@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FiTwitter, FiFacebook, FiInstagram, FiLinkedin } from "react-icons/fi";
-import { Image} from "lucide-react";
+import { Image } from "lucide-react";
 
 // SVG Components as React Icons
 const TwitterIcon = () => <FiTwitter className="w-6 h-6" />;
@@ -14,7 +14,7 @@ const Footer = () => {
     "text-sm text-white transition-all duration-200 hover:text-opacity-80 focus:text-opacity-80 cursor-pointer";
 
   return (
-    <section className="bg-gradient-to-r from-base-600 to-base-200">
+    <footer className="bg-gradient-to-r from-base-600 to-base-200">
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="text-center xl:flex xl:items-center xl:justify-between xl:text-left">
           <div className="xl:flex xl:items-center xl:justify-start">
@@ -33,27 +33,27 @@ const Footer = () => {
           <div className="items-center mt-8 xl:mt-0 xl:flex xl:justify-end xl:space-x-8">
             <ul className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 xl:justify-end">
               <li>
-                <Link href="/about">
+                <Link to="/about">
                   <span className={anchorStyles}>About</span>
                 </Link>
               </li>
               <li>
-                <Link href="/services">
+                <Link to="/services">
                   <span className={anchorStyles}>Services</span>
                 </Link>
               </li>
               <li>
-                <Link href="/privacy">
+                <Link to="/privacy">
                   <span className={anchorStyles}>Privacy Policy</span>
                 </Link>
               </li>
               <li>
-                <Link href="/terms">
+                <Link to="/terms">
                   <span className={anchorStyles}>Terms & Conditions</span>
                 </Link>
               </li>
               <li>
-                <Link href="/support">
+                <Link to="/support">
                   <span className={anchorStyles}>Support</span>
                 </Link>
               </li>
@@ -97,21 +97,33 @@ const Footer = () => {
               </li>
               <li>
                 <a
-                  href="https://instagram.com"
-                  title="Instagram"
+                  href="https://linkedin.com"
+                  title="LinkedIn"
                   className="block text-white transition-all duration-200 hover:text-opacity-80 focus:text-opacity-80"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <FiLinkedin/>
+                  <FiLinkedin />
                 </a>
               </li>
             </ul>
           </div>
         </div>
       </div>
-    </section>
+    </footer>
   );
 };
 
-export default Footer;
+const AppLayout = ({ children }) => {
+  return (
+    <div className="flex flex-col min-h-screen">
+      {/* Main content area */}
+      <main className="flex-grow">{children}</main>
+
+      {/* Footer */}
+      <Footer />
+    </div>
+  );
+};
+
+export default AppLayout;
