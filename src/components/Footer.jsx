@@ -14,7 +14,7 @@ const Footer = () => {
     "text-sm text-white transition-all duration-200 hover:text-opacity-80 focus:text-opacity-80 cursor-pointer";
 
   return (
-    <section className="py-12 bg-gradient-to-r from-base-600 to-base-200">
+    <section className="bg-gradient-to-r from-base-600 to-base-200">
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="text-center xl:flex xl:items-center xl:justify-between xl:text-left">
           <div className="xl:flex xl:items-center xl:justify-start">

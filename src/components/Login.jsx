@@ -2,26 +2,33 @@ import { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUser } from "@/utils/userSlice";
+import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+import { BASE_URL } from "@/utils/constants";
 const Login = () => {
 
-    const[emailId,setEmailId]=useState("gambhir@gmail.com");
-    const[password,setPassword]=useState("Gambhir@123");
+    const[emailId,setEmailId]=useState("reddy@gmail.com");
+    const[password,setPassword]=useState("Reddy@123");
  const dispatch=useDispatch();
+ const navigate=useNavigate();
     const handleLogin = async (e) => {
         try {
             e.preventDefault();
-          const response = await axios.post("http://localhost:3000/login", {
+          const response = await axios.post(BASE_URL+ "/login", {
             emailId,password
           },{
             withCredentials:true,
           });
-          console.log(response.data);
+          //console.log(response.data);
           dispatch(addUser(response.data));
+          navigate("/feed");
         } catch (err) { 
-          console.error(err)
-        }
+            console.error(err)
+        } 
       };
     return (
+      <>
       <section className="relative flex h-screen items-center justify-center bg-[url()] bg-cover bg-center">
         <div className="relative z-10 flex w-full bg-white/10 max-w-md flex-col rounded-3xl border-base/50 border-t px-4 py-10 backdrop-blur-2xl sm:px-8 md:px-20">
           <div className="mx-auto w-full">
@@ -100,6 +107,7 @@ const Login = () => {
           </div>
         </div>
       </section>
+      </>
     );
   };
   
