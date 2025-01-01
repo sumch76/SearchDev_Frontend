@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Navbar from './Navbar'
 import { Outlet, useNavigate } from 'react-router-dom'
-import Footer from './Footer'
+// import Footer from './Footer'
 
 import { BASE_URL } from '@/utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
@@ -36,7 +36,7 @@ const Body = () => {
     <div>
       <Navbar />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </div>   
   );
 }

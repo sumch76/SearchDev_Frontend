@@ -8,6 +8,7 @@ const Login = () => {
 
     const[emailId,setEmailId]=useState("reddy@gmail.com");
     const[password,setPassword]=useState("Reddy@123");
+    const[error,setError]=useState("");
  const dispatch=useDispatch();
  const navigate=useNavigate();
     const handleLogin = async (e) => {
@@ -22,7 +23,9 @@ const Login = () => {
           dispatch(addUser(response.data));
           return navigate("/feed");
         } catch (err) { 
-            console.error(err)
+          const errorMessage = err.response?.data || "Something went wrong. Please try again.";
+      setError(errorMessage);
+      console.error(err);
         } 
       };
     return (
@@ -89,6 +92,7 @@ const Login = () => {
                     Login
                   </button>
                 </div>
+                {error && <p className="text-red-700 text-center mt-4">{error}</p>}
               </div>
               <div className="mt-6 text-center">
                 <p className="text-sm font-medium text-black">
@@ -138,6 +142,5 @@ const Login = () => {
       </svg>
     );
   }
-  
   export default Login;
   

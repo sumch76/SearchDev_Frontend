@@ -114,16 +114,3 @@ const Footer = () => {
   );
 };
 
-const AppLayout = ({ children }) => {
-  return (
-    <div className="flex flex-col min-h-screen">
-      {/* Main content area */}
-      <main className="flex-grow">{children}</main>
-
-      {/* Footer */}
-      <Footer />
-    </div>
-  );
-};
-
-export default AppLayout;
