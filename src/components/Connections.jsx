@@ -1,17 +1,25 @@
-import { BASE_URL } from '@/utils/constants'
-import React from 'react'
+import { addConnection } from '@/utils/connectionSlice';
+import { BASE_URL } from '@/utils/constants';
+import React ,{useEffect}from 'react'
+import { useDispatch } from 'react-redux';
+import axios from 'axios';
 
 const Connections = () => {
-    const fetchConnections= async()=>
+    const dispatch =useDispatch();
+    const fetchConnections = async()=>
     {
         try {
-            const res=await axios.get(BASE_URL+"/connections",
+            const response= await axios.get(BASE_URL +"user/connections",
                 {
                     withCredentials:true, 
                 }
-            )
+            );
+            console.log(response?.data);
             
+            dispatch(addConnection(response?.data?.data))
+           
         } catch (error) {
+            console.error(error);
             
         }
     };
@@ -19,8 +27,8 @@ const Connections = () => {
         fetchConnections();
     },[])
   return (
-    <div>
-        
+    <div className='flex justify-center my-10'>
+        <h1 className='text-bold text-2xl'>{}</h1>
     </div>
   )
 }

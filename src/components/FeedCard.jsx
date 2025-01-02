@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaCheckCircle } from "react-icons/fa";
 import { FcCancel } from "react-icons/fc";
-const FeedCard = ({ user ,showActions=true}) => {
+const FeedCard = ({ user={} ,showActions=true}) => {
   const { firstName, lastName, photoURL, age, gender, about} = user;
 
   return (

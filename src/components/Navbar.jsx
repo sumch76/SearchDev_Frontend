@@ -47,7 +47,7 @@ const navigate=useNavigate();
             <span className="badge bg-green-300 text-black">New</span>
           </Link>
         </li>
-        <li><Link to="/connections">Connections</Link></li>
+        <li><Link to="/user/connections">Connections</Link></li>
         <li><a onClick={handleLogout}>Logout</a></li>
       </ul>
     </div>

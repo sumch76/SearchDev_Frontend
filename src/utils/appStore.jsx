@@ -6,7 +6,7 @@ import connectionReducer from "./connectionSlice";
     reducer:{
         "user":userReducer,
         "feed":feedReducer,
-        "connection":connectionReducer
+        "connection":connectionReducer,
 
     }, 
  });
