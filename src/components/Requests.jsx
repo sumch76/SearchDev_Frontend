@@ -1,7 +1,7 @@
 import { BASE_URL } from '@/utils/constants'
 import { addRequest } from '@/utils/requestSlice'
 import axios from 'axios'
-import React from 'react'
+import React,{useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Requests = () => {
@@ -15,12 +15,15 @@ const Requests = () => {
             }
         );
         dispatch(addRequest(response.data));
+        console.log(response.data);
+        
     }
     useEffect(() => {
         getRequest();
     }, []);
   return (
     <div>
+        <h1>Requests Received</h1>
       
     </div>
   )
