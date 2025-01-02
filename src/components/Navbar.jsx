@@ -26,7 +26,7 @@ const navigate=useNavigate();
   return (
    <div className="navbar bg-base-200">
   <div className="flex-1">
-    <Link to="/" className="btn btn-ghost text-xl">💡SearchDev</Link>
+    <Link to="/feed" className="btn btn-ghost text-xl">💡SearchDev</Link>
   </div>
 { user && (<div className="flex-none gap-2"> 
   <p>Welcome {user.firstName}😍</p>
@@ -47,7 +47,7 @@ const navigate=useNavigate();
             <span className="badge bg-green-300 text-black">New</span>
           </Link>
         </li>
-        <li><a>Settings</a></li>
+        <li><Link to="/connections">Connections</Link></li>
         <li><a onClick={handleLogout}>Logout</a></li>
       </ul>
     </div>

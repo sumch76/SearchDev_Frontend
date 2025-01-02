@@ -96,7 +96,6 @@ const EditProfile = ({ user }) => {
             <option value="female">Female</option>
             <option value="others">Others</option>
           </select>
-          
           <label className="text-sm mb-2 text-gray-200">Bio</label>
           <input
             placeholder="Update your bio..."
@@ -117,7 +116,7 @@ const EditProfile = ({ user }) => {
 
       {/* Right side: FeedCard */}
       <div className="w-full  lg:w-1/3">
-        <FeedCard user={{ firstName, lastName, age, gender, photoURL, bio: about }} showActions={false} />
+        <FeedCard user={{ firstName, lastName, age, gender, photoURL, about}} showActions={false} />
       </div>
     </div>
   );
