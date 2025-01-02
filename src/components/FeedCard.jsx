@@ -1,8 +1,8 @@
 import React from 'react';
 import { FaCheckCircle } from "react-icons/fa";
 import { FcCancel } from "react-icons/fc";
-const FeedCard = ({ user }) => {
-  const { firstName, lastName, photoURL, age, gender } = user;
+const FeedCard = ({ user ,showActions=true}) => {
+  const { firstName, lastName, photoURL, age, gender, about} = user;
 
   return (
     <div className="flex h-screen items-center justify-center">
@@ -31,8 +31,11 @@ const FeedCard = ({ user }) => {
           <p className="block font-sans text-base font-light leading-relaxed text-gray-700">
             {gender ? `Gender: ${gender}` : 'Gender not available'}
           </p>
+          <p className="block font-sans text-base font-light leading-relaxed text-gray-700">
+            { about? `Bio: ${about}` : 'bio not available'}
+          </p>
         </div>
-        <div className="p-6 flex items-center justify-between">
+       { showActions && (<div className="p-6 flex items-center justify-between">
           <button
             type="button"
             className="select-none rounded-lg bg-green-500 py-3 px-6 text-center text-xs font-bold uppercase text-white shadow-md transition-all hover:shadow-lg focus:opacity-85"
@@ -45,7 +48,7 @@ const FeedCard = ({ user }) => {
           >
             Ignore <FcCancel />
           </button>
-        </div>
+        </div>)}
       </div>
     </div>
   );
