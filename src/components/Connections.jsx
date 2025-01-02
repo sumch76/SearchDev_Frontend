@@ -1,10 +1,26 @@
+import { BASE_URL } from '@/utils/constants'
 import React from 'react'
 
 const Connections = () => {
+    const fetchConnections= async()=>
+    {
+        try {
+            const res=await axios.get(BASE_URL+"/connections",
+                {
+                    withCredentials:true, 
+                }
+            )
+            
+        } catch (error) {
+            
+        }
+    };
+    useEffect(()=>{
+        fetchConnections();
+    },[])
   return (
     <div>
-        <h1>Connections Page</h1>
-        <p>This is the connections page.</p>
+        
     </div>
   )
 }
