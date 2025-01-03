@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "@/utils/constants";
-import { addRequest } from "@/utils/requestSlice";
+import { addRequest, removeRequest } from "@/utils/requestSlice";
 import toast, { Toaster } from 'react-hot-toast';
 
 const Requests = () => {
@@ -17,15 +17,23 @@ const Requests = () => {
             }
             );
             console.log(`Request ${status}:`, _id);
+
             if (status === "accepted") {
-                toast.success(`Request ${status} successfully!`);
+                toast.success(`Request ${status} successfully!`,{
+                    position:"bottom-right"
+                });
             }
             else if (status === "rejected") {
-                toast.error(`Request ${status}😭!`);
+                toast.error(`Request ${status}😭!`,
+                    {
+                         position:"bottom-right"
+                    }
+                );
             }
-
+          dispatch(removeRequest(_id));
         } catch (error) {
             console.error("Error reviewing request:", error);
+            toast.error(`Failed to ${status} request`)
 
         }
     }
@@ -37,8 +45,10 @@ const Requests = () => {
             });
             // Dispatching the whole array of requests
             dispatch(addRequest(response.data.data));
+            console.log(response.data.data);
         } catch (error) {
             console.error("Error fetching requests:", error);
+           
         }
     };
 
