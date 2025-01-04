@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import FeedCard from './FeedCard';
 const Feed = () => {
   const feed=useSelector((store)=>store.feed);
-  console.log(feed);
+  //console.log(feed);
   
   const dispatch=useDispatch();
   const getFeed= async()=>
@@ -24,7 +24,7 @@ const Feed = () => {
   useEffect(() => {
     getFeed();
   }, []);
-  if(!feed)return
+  if(!feed || feed.length===0) return <h1 className='flex justify-center'>oops you have been caught</h1>
   return ( 
    
     feed && (

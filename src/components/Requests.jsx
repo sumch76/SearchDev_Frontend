@@ -11,7 +11,7 @@ const Requests = () => {
     const request = useSelector((store) => store.request);
     const reviewRequest = async (status, _id) => {
         try {
-            const response = await axios.post(BASE_URL + "/request/review/" + status + "/" + _id,
+            await axios.post(BASE_URL + "/request/review/" + status + "/" + _id,
                 {}, {
                 withCredentials: true
             }
@@ -44,7 +44,7 @@ const Requests = () => {
                 withCredentials: true,
             });
             // Dispatching the whole array of requests
-            dispatch(addRequest(response.data.data));
+            dispatch(addRequest(response.data.data||  []));
             console.log(response.data.data);
         } catch (error) {
             console.error("Error fetching requests:", error);
@@ -61,7 +61,7 @@ const Requests = () => {
     return (
         <div className="flex flex-wrap justify-center gap-6 mt-10">
             <Toaster />
-            {request.map((req, _id) => {
+            {request.map((req) => {
                 const user = req.fromUserId; // Access populated `fromUserId`
                 return (
                     <div

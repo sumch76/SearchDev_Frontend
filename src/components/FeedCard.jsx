@@ -37,9 +37,9 @@ const handleSendRequest=async(status,_id)=>
   return (
     <div>
       <Toaster/>
-       <div className="flex h-screen items-center justify-center">
-      <div className="relative flex w-96 flex-col rounded-xl bg-red-200 bg-clip-border text-gray-700 shadow-lg">
-        <div className="relative mx-4 -mt-6 h-90 overflow-hidden rounded-xl bg-red-700">
+       <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center">
+      <div className="relative flex w-96 flex-col rounded-xl bg-slate-500 bg-clip-border text-gray-700 shadow-lg">
+        <div className="relative mx-4 -mt-6 h-90 overflow-hidden rounded-xl bg-grey">
           {photoURL ? (
             <img
               src={photoURL}

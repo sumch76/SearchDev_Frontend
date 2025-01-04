@@ -4,24 +4,25 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "@/utils/constants";
-const Login = () => {
-
-    const[emailId,setEmailId]=useState("reddy@gmail.com");
-    const[password,setPassword]=useState("Reddy@123");
+const Signup = () => {
+     const[firstName,setFirstName]=useState("");
+     const[lastName,setLastName]=useState("");
+    const[emailId,setEmailId]=useState("");
+    const[password,setPassword]=useState("");
     const[error,setError]=useState("");
  const dispatch=useDispatch();
  const navigate=useNavigate();
-    const handleLogin = async (e) => {
+    const handleSignup = async (e) => {
         try {
             e.preventDefault();
-          const response = await axios.post(BASE_URL+ "/login", {
-            emailId,password
+          const response = await axios.post(BASE_URL+ "/signup", {
+            firstName,lastName,emailId,password
           },{
             withCredentials:true,
           });
-          console.log(response.data);
-          dispatch(addUser(response.data));
-          return navigate("/feed");
+          console.log(response.data.data);
+          dispatch(addUser(response.data.data));
+        navigate("/profile");
         } catch (err) { 
           const errorMessage = err.response?.data || "Something went wrong. Please try again.";
       setError(errorMessage);
@@ -50,12 +51,40 @@ const Login = () => {
                 </div>
               </div>
             </div>
-            <form onSubmit={handleLogin}>
+            <form onSubmit={handleSignup}>
               <div className="space-y-3">
                 <div>
+                <label
+                    className="mb-3 block text-sm font-medium text-black"
+                    htmlFor="name"
+                  >
+                    FirstName
+                  </label>
+                  <input
+                    className="block h-12 w-full rounded-xl bg-white/10 px-4 py-2 text-black placeholder-neutral-300 focus:outline-none focus:ring-neutral-300 sm:text-sm"
+                    id="firstName"
+                    placeholder="Enter your first name"
+                    type="text"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                   <label
+                    className="mb-3 block text-sm font-medium text-black"
+                    htmlFor="name"
+                  >
+                    Email
+                  </label>
+                  <input
+                    className="block h-12 w-full rounded-xl bg-white/10 px-4 py-2 text-black placeholder-neutral-300 focus:outline-none focus:ring-neutral-300 sm:text-sm"
+                    id="lastName"
+                    placeholder="Your last name"
+                    type="text"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
                   <label
                     className="mb-3 block text-sm font-medium text-black"
-                    htmlFor="email"
+                    htmlFor="name"
                   >
                     Email
                   </label>
@@ -63,7 +92,7 @@ const Login = () => {
                     className="block h-12 w-full rounded-xl bg-white/10 px-4 py-2 text-black placeholder-neutral-300 focus:outline-none focus:ring-neutral-300 sm:text-sm"
                     id="name"
                     placeholder="Your email address"
-                    type="email"
+                    type="text"
                     value={emailId}
                     onChange={(e) => setEmailId(e.target.value)}
                   />
@@ -89,19 +118,19 @@ const Login = () => {
                     className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-neutral-900 px-5 py-3 font-medium text-white hover:bg-neutral-700 focus:ring-2 focus:ring-black focus:ring-offset-2"
                     type="submit"
                   >
-                    Login
+                    Signup
                   </button>
                 </div>
                 {error && <p className="text-red-700 text-center mt-4">{error}</p>}
               </div>
               <div className="mt-6 text-center">
                 <p className="text-sm font-medium text-black">
-                  Not have a password?{" "}
-                  <Link to="/signup"
+                 Already having account?{" "}
+                  <Link to="/login"
                     className="text-amber-500 hover:text-black"
                    
                   >
-                    Sign up now
+                    Login
                   </Link>
                 </p>
               </div>
@@ -142,5 +171,5 @@ const Login = () => {
       </svg>
     );
   }
-  export default Login;
+  export default Signup;
   
