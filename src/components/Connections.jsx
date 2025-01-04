@@ -15,7 +15,6 @@ const Connections = () => {
                     withCredentials:true, 
                 }
             );
-         
             dispatch(addConnection(response?.data?.data))
             console.log(response?.data);
            
@@ -29,13 +28,17 @@ const Connections = () => {
     if(!connection) return;
     if(connection.length===0) return <h1>no connection found</h1>
   return (
-    <div className="flex flex-wrap justify-center gap-6 mt-10">
+    <div
+      className="h-[50rem] w-full dark:bg-black bg-blue-700  dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex items-center justify-center">
+      <div
+        className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-blue-950 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+    <div className="flex flex-wrap justify-center gap-6 mb-10">
     {connection.map((conn, index) => (
       <div
         key={index}
-        className="w-72 bg-white shadow-md rounded-xl overflow-hidden transform transition-transform hover:scale-105 border"
+        className=" bg-white shadow-md rounded-xl overflow-hidden transform transition-transform hover:scale-105 border"
       >
-        <div className="h-48 bg-gray-300 flex items-center justify-center">
+        <div className="h-60 bg-gray-300 flex items-center justify-center">
           {conn.photoURL ? (
             <img
               src={conn.photoURL}
@@ -56,6 +59,8 @@ const Connections = () => {
       </div>
     ))}
   </div>
+    </div>
+    
 );
 };
 

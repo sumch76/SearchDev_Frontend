@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {Link,useNavigate } from 'react-router-dom';
 import { removeUser } from '@/utils/userSlice';
 import axios from 'axios';
+import logo from "../assets/logo2.png";
 
 const Navbar = () => {
   const user=useSelector(store=>store.user);
@@ -26,7 +27,12 @@ const navigate=useNavigate();
   return (
    <div className="navbar bg-base-200">
   <div className="flex-1">
-    <Link to="/feed" className="btn btn-ghost text-xl">💡SearchDev</Link>
+    <Link to="/feed" className="btn btn-ghost ">
+    <img 
+    src={logo} 
+    alt="Feed Icon" 
+    style={{ width: '60px', height: '60px' }} 
+  /></Link>
   </div>
 { user && (<div className="flex-none gap-2"> 
   <p>Welcome {user.firstName}😍</p>

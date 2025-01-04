@@ -4,6 +4,7 @@ import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import FeedCard from './FeedCard';
+import { Background } from './ui/Background';
 const Feed = () => {
   const feed=useSelector((store)=>store.feed);
   //console.log(feed);
@@ -26,11 +27,16 @@ const Feed = () => {
   }, []);
   if(!feed || feed.length===0) return <h1 className='flex justify-center'>oops you have been caught</h1>
   return ( 
-   
+  
     feed && (
-        <div>
-          <FeedCard user={feed[0]} />
-        </div>
+      <div
+      className="h-[50rem] w-full dark:bg-black bg-white  dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex items-center justify-center">
+      {/* Radial gradient for the container to give a faded look */}
+      <div
+        className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+     <FeedCard user={feed[0]} />
+    </div>
+             
       )
     )
 }

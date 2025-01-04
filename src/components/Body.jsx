@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react'
 import Navbar from './Navbar'
-import { Outlet, useNavigate } from 'react-router-dom'
-// import Footer from './Footer'
-
+import "./PageStyle/grid.css"
+// import { Sidebar, Logo, LogoIcon } from './Sidebar';
 import { BASE_URL } from '@/utils/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { addUser } from '@/utils/userSlice'
 import axios from 'axios';
+import { Outlet, useNavigate } from 'react-router-dom';
+import { Background } from './ui/Background'
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -33,9 +34,10 @@ const Body = () => {
   }, []);
   return (
     <div>
+      
       <Navbar />
       <Outlet />
-      {/* <Footer /> */}
+      
     </div>   
   );
 }

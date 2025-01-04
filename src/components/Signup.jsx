@@ -31,7 +31,7 @@ const Signup = () => {
       };
     return (
       <>
-      <section className="relative flex h-screen items-center justify-center bg-[url()] bg-cover bg-center">
+      <section className="relative flex h-screen items-center justify-center bg-[url('https://res.cloudinary.com/sumit76/image/upload/v1735988398/fp9iylspf1epyjvgimdm.jpg')] bg-cover bg-center">
         <div className="relative z-10 flex w-full bg-white/10 max-w-md flex-col rounded-3xl border-base/50 border-t px-4 py-10 backdrop-blur-2xl sm:px-8 md:px-20">
           <div className="mx-auto w-full">
             <div className="mt-8">
