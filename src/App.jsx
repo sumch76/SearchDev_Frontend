@@ -8,6 +8,7 @@ import Profile from "./components/Profile";
 import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import Signup from "./components/Signup";
+import Hero from "./components/Hero";
 //import {Sidebar} from "./components/Sidebar";
 function App() {
 
@@ -17,7 +18,7 @@ function App() {
     <BrowserRouter basename="/">
     <Routes>
       <Route path="/" element={<Body />} >
-  
+  <Route path="/" element={<Hero/>}/>
       <Route path="/login" element={<Login />}/>
       <Route path="/signup"element={<Signup />}/>
       <Route path="/feed" element={<Feed/>}/>
