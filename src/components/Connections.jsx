@@ -32,11 +32,11 @@ const Connections = () => {
       className="h-[50rem] w-full dark:bg-black bg-blue-700  dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex items-center justify-center">
       <div
         className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-blue-950 [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-    <div className="flex flex-wrap justify-center gap-6 mb-10">
+    <div className="flex flex-wrap justify-center gap-7 mb-10">
     {connection.map((conn, index) => (
       <div
         key={index}
-        className=" bg-white shadow-md rounded-xl overflow-hidden transform transition-transform hover:scale-105 border"
+        className=" bg-slate-950 shadow-md rounded-xl overflow-hidden transform transition-transform hover:scale-105 border"
       >
         <div className="h-60 bg-gray-300 flex items-center justify-center">
           {conn.photoURL ? (
@@ -50,10 +50,10 @@ const Connections = () => {
           )}
         </div>
         <div className="p-4">
-          <h3 className="text-lg font-semibold text-gray-800">
+          <h3 className="text-lg font-semibold text-white">
             {conn.firstName || "Unknown Name"} {conn.lastName || "Unknown Last Name"}
           </h3>
-          <p className="text-sm text-gray-600">{conn.age || "Role not available"}</p>
+          <p className="text-sm text-white/39">{conn.age || "Role not available"}</p>
           <p className="text-sm text-gray-500 mt-2">{conn.about || "Bio not available"}</p>
         </div>
       </div>

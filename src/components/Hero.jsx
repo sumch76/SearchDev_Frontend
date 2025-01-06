@@ -1,6 +1,5 @@
 import React from "react";
 import { FaPlay } from "react-icons/fa6";
-import { HiOutlineBars3 } from "react-icons/hi2";
 import { IoIosArrowDown } from "react-icons/io";
 import { Link } from "react-router-dom";
 
@@ -35,8 +34,7 @@ function Hero() {
             Whether you're looking for collaborators, mentors, or just fellow coders to vibe with, you're in the right place!
             </p>
             <div className="flex items-center justify-center mt-8 space-x-3 sm:space-x-4">
-              <Link to="/Login"
-                href="#"
+              <Link to="/login"
                 className={`${commonStyles.button} bg-white text-black hover:bg-opacity-90 ${commonStyles.focusRing} border-2 border-transparent`}
               >
                 Login

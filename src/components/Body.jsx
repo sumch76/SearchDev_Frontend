@@ -23,7 +23,7 @@ const Body = () => {
       );
       dispatch(addUser(response.data));
     } catch (error) {
-      if (error.status === 400) {
+      if (error.status === 401) {
         navigate("/login");
       }
       console.log(error.message);

@@ -25,7 +25,7 @@ const navigate=useNavigate();
     }
   }
   return (
-   <div className="navbar bg-base-200">
+   <div className="navbar bg-slate-950" style={{ fontFamily: "'Gill Sans', sans-serif" }}>
   <div className="flex-1">
     <Link to="/feed" className="btn btn-ghost ">
     <img 

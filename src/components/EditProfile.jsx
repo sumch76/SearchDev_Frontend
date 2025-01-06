@@ -35,7 +35,6 @@ const EditProfile = ({ user }) => {
       setError(error.response?.data || "Something went wrong. Please try again.");
     }
   };
-
   return (
     // Removed h-screen and added padding-top to account for navbar
     <div className="flex flex-col lg:flex-row items-start justify-center min-h-[calc(100vh-4rem)] pt-20 px-4 gap-6">

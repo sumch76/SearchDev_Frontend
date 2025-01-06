@@ -9,7 +9,6 @@ import Connections from "./components/Connections";
 import Requests from "./components/Requests";
 import Signup from "./components/Signup";
 import Hero from "./components/Hero";
-//import {Sidebar} from "./components/Sidebar";
 function App() {
 
   return (
