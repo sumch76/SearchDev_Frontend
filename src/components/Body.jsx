@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { addUser } from '@/utils/userSlice'
 import axios from 'axios';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { Background } from './ui/Background'
 
 const Body = () => {
   const dispatch = useDispatch();

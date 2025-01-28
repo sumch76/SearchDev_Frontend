@@ -10,7 +10,6 @@ import Requests from "./components/Requests";
 import Signup from "./components/Signup";
 import Hero from "./components/Hero";
 function App() {
-
   return (
     <>
     <Provider store={appStore}>
