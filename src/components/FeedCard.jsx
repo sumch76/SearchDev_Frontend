@@ -4,116 +4,148 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
 import axios from 'axios';
-const FeedCard = ({ user={} ,showActions=true}) => {
+
+const FeedCard = ({ user={}, showActions=true }) => {
   const {_id, firstName, lastName, photoURL, age, gender, about} = user;
-  const dispatch=useDispatch();
-const handleSendRequest=async(status,_id)=>
-{
-  try {
-    const response=await axios.post(BASE_URL+"/request/send/"+status+"/"+_id,
-      {},{
-        withCredentials: true,
-      }
-    );
-    console.log(response);
-    
-    if (status === "interested") {
-      toast.success(`you are interested in ${firstName}`,{
-          position:"bottom-right"
-      });
-  }
-  else if (status === "ignored") {
-      toast.error(`ME nhi sehta ${firstName}😭!`,
-          {
-               position:"bottom-right"
-          }
+  const dispatch = useDispatch();
+
+  const handleSendRequest = async(status, _id) => {
+    try {
+      const response = await axios.post(BASE_URL+"/request/send/"+status+"/"+_id,
+        {},{
+          withCredentials: true,
+        }
       );
+      console.log(response);
+      
+      if (status === "interested") {
+        toast.success(`You are interested in ${firstName}`,{
+            position:"bottom-right"
+        });
+      }
+      else if (status === "ignored") {
+          toast.error(`ME nhi sehta ${firstName}😭!`,
+              {
+                   position:"bottom-right"
+              }
+          );
+      }
+      dispatch(removeUserFromFeed(_id))
+      
+    } catch (error) {  
+    }
   }
-    dispatch(removeUserFromFeed(_id))
-    
-  } catch (error) {  
-  }
-}
+
   return (
-    <div>
-    <Toaster />
-    <div className="flex min-h-[calc(100vh-5rem)] items-center justify-center px-4">
-      <div className="relative flex w-full max-w-md flex-col rounded-xl bg-slate-950 bg-clip-border border border-blue-900 text-gray-700 shadow-lg">
-        <div className="relative mx-4  -mt-7 rounded-xl bg-grey h-48 sm:h-60 overflow-hidden object-cover">
-          {photoURL ? (
-            <img
-              src={photoURL}
-              alt={`${firstName}'s Profile`}
-              className="h-full w-full object-cover"
-              style={{ aspectRatio: '1/1' }} // Maintains a square aspect ratio
-            />
-          ) : (
-            <div className="flex items-center justify-center h-full w-full object-cover bg-gray-200">
-              <span className="text-slate-100">No Image Available</span>
+    <div className="w-full h-full">
+      <Toaster />
+      <div className="flex items-center justify-center w-full h-full px-4 py-6">
+        <div className="relative w-full max-w-sm sm:max-w-md bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 rounded-2xl shadow-2xl border border-slate-700 overflow-hidden">
+          {/* Profile Image Section */}
+          <div className="relative h-64 sm:h-72 w-full overflow-hidden">
+            {photoURL ? (
+              <img
+                src={photoURL}
+                alt={`${firstName}'s Profile`}
+                className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+              />
+            ) : (
+              <div className="flex items-center justify-center h-full w-full bg-gradient-to-br from-slate-700 to-slate-800">
+                <div className="text-center">
+                  <svg className="w-16 h-16 mx-auto text-slate-400 mb-2" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-slate-300 text-sm">No Image Available</span>
+                </div>
+              </div>
+            )}
+            {/* Gradient overlay for better text readability */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+          </div>
+
+          {/* Profile Info Section */}
+          <div className="p-6 space-y-4">
+            <div className="text-center sm:text-left">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2">
+                {firstName} {lastName}
+              </h2>
+              
+              <div className="flex flex-wrap gap-4 justify-center sm:justify-start text-sm">
+                {age && (
+                  <div className="flex items-center space-x-1 text-slate-300">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                    </svg>
+                    <span>{age} years</span>
+                  </div>
+                )}
+                
+                {gender && (
+                  <div className="flex items-center space-x-1 text-slate-300">
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clipRule="evenodd" />
+                    </svg>
+                    <span className="capitalize">{gender}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Bio Section */}
+            {about && (
+              <div className="bg-slate-800/50 rounded-lg p-4">
+                <p className="text-slate-300 text-sm leading-relaxed">
+                  {about}
+                </p>
+              </div>
+            )}
+          </div>
+
+          {/* Action Buttons */}
+          {showActions && (
+            <div className="p-6 pt-0">
+              <div className="flex gap-3">
+                <button
+                  className="flex-1 bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:ring-offset-slate-900 flex items-center justify-center space-x-2"
+                  onClick={() => handleSendRequest('interested', _id)}
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Interested</span>
+                </button>
+                
+                <button
+                  className="flex-1 bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-slate-900 flex items-center justify-center space-x-2"
+                  onClick={() => handleSendRequest('ignored', _id)}
+                >
+                  <svg
+                    className="w-5 h-5"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                  <span>Ignore</span>
+                </button>
+              </div>
             </div>
           )}
         </div>
-  
-        <div className="p-4 sm:p:6">
-          <h5 className="mb-2 font-bold text-2xl text-slate-100 leading-snug tracking-normal">
-            {firstName} {lastName}
-          </h5>
-          <p className="text-sm sm:text-base font-light text-gray-400">
-            {age ? `Age: ${age}` : 'Age not available'}
-          </p>
-          <p className="text-sm sm:text-base font-light text-gray-400">
-            {gender ? `Gender: ${gender}` : 'Gender not available'}
-          </p>
-          <p className="text-sm sm:text-base font-light text-gray-500">
-            {about ? `Bio: ${about}` : 'Bio not available'}
-          </p>
-        </div>
-        {showActions && (
-          <div className="flex justify-between px-6 py-7">
-            <button
-              className="focus:outline-none text-white bg-green-400 hover:bg-green-900 focus:ring-2 focus:ring-green-300 font-medium rounded-xl text-sm px-6 py-2.5 ml-3 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 flex items-center justify-between"
-              onClick={() => handleSendRequest('interested', _id)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="20"
-                height="18"
-                fill="currentColor"
-                className="bi bi-heart-fill mr-2"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"
-                />
-              </svg>
-              <span>Interested</span>
-            </button>
-            <button
-              className="focus:outline-none text-white bg-red-400 hover:bg-red-900 focus:ring-2 focus:ring-red-300 font-medium rounded-xl text-sm px-6 py-2.5 ml-3 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 flex items-center justify-between"
-              onClick={() => handleSendRequest('ignored', _id)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="18"
-                fill="currentColor"
-                className="mr-2"
-                viewBox="0 0 18 16"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z"
-                />
-              </svg>
-              <span>Ignore</span>
-            </button>
-          </div>
-        )}
       </div>
     </div>
-  </div>
-  
   );
 };
 

@@ -4,17 +4,15 @@ import axios from 'axios'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import FeedCard from './FeedCard';
-// import { Background } from './ui/Background';
+
 const Feed = () => {
-  const feed=useSelector((store)=>store.feed);
-  //console.log(feed);
+  const feed = useSelector((store) => store.feed);
+  const dispatch = useDispatch();
   
-  const dispatch=useDispatch();
-  const getFeed= async()=>
-  {
+  const getFeed = async() => {
     if(feed) return
     try {
-      const response= await axios.get(BASE_URL+"/feed",{
+      const response = await axios.get(BASE_URL+"/feed",{
         withCredentials:true,
       });
       dispatch(addFeed(response?.data?.data));
@@ -23,24 +21,31 @@ const Feed = () => {
       console.error(error.message); 
     }
   };
+  
   useEffect(() => {
     getFeed();
   }, []);
-  if(!feed) return;
-  if (feed.length === 0) return <div className="h-[50rem] w-full dark:bg-black bg-white  dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex items-center justify-center">
-        <p className="text-4xl sm:text-7xl font-bold relative z-20 bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-500 py-8">Loading..</p></div>;
-  return ( 
   
-    feed && (
-      <div
-      className="h-[50rem] w-full dark:bg-black bg-white  dark:bg-grid-white/[0.2] bg-grid-black/[0.2] relative flex items-center justify-center">
-      <div
-        className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
-     <FeedCard user={feed[0]} />
+  if(!feed) return;
+  
+  if (feed.length === 0) return (
+    <div className="h-screen w-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 flex items-center justify-center">
+      <div className="text-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4"></div>
+        <p className="text-2xl sm:text-4xl font-bold text-white">Loading...</p>
+      </div>
     </div>
-             
-      )
+  );
+  
+  return ( 
+    feed && (
+      <div className="h-screen w-full bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
+        <div className="h-full w-full flex items-center justify-center p-4">
+          <FeedCard user={feed[0]} />
+        </div>
+      </div>
     )
+  )
 }
 
 export default Feed;
